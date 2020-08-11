@@ -66,7 +66,16 @@ public class FirebaseVisionPlugin extends CordovaPlugin {
             try {
                 Uri uri = Uri.parse(message);
                 FirebaseVisionImage image = FirebaseVisionImage.fromFilePath(applicationContext, uri);
-                FirebaseVisionTextRecognizer recognizer = firebaseVision.getOnDeviceTextRecognizer();
+                
+                
+                FirebaseVisionCloudTextRecognizerOptions options = new FirebaseVisionCloudTextRecognizerOptions.Builder()
+                            .setLanguageHints(Arrays.asList("en", "th"))
+                            .build();
+
+    
+                FirebaseVisionTextRecognizer recognizer = FirebaseVision.getInstance()
+                  .getCloudTextRecognizer(options);
+                
                 recognizer.processImage(image)
                         .addOnSuccessListener(new OnSuccessListener<FirebaseVisionText>() {
                             @Override

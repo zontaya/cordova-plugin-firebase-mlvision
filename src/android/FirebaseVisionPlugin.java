@@ -68,13 +68,9 @@ public class FirebaseVisionPlugin extends CordovaPlugin {
                 FirebaseVisionImage image = FirebaseVisionImage.fromFilePath(applicationContext, uri);
                 
                 
-                FirebaseVisionCloudTextRecognizerOptions options = new FirebaseVisionCloudTextRecognizerOptions.Builder()
-                            .setLanguageHints(Arrays.asList("en", "th"))
-                            .build();
+              FirebaseVisionTextRecognizer recognizer = FirebaseVision.getInstance().getCloudTextRecognizer();
 
-    
-                FirebaseVisionTextRecognizer recognizer = FirebaseVision.getInstance()
-                  .getCloudTextRecognizer(options);
+  
                 
                 recognizer.processImage(image)
                         .addOnSuccessListener(new OnSuccessListener<FirebaseVisionText>() {
